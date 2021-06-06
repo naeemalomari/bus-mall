@@ -1,19 +1,22 @@
-'use strict'
+'use strict';
 let leftImageElement=document.getElementById('leftimage');
 let rightImageElement=document.getElementById('rightimage');
-let middleImageElement=document.getElementById('middleimage')
+let middleImageElement=document.getElementById('middleimage');
+// let section=document.getElementById('list');
 
 let leftIndex;
 let RightIndex;
 let MiddleIndex;
-let rounds=5;
-let clickingvote=0;
+
+let rounds=25;
+let clickingNumber=0;
 
 function BusMall (name,source){
-    this.name=name;
-    this.source=source;
-    this.votes=0;
-BusMall.all.push(this);
+  this.name=name;
+  this.source=source;
+  this.votes=0;
+  this.shown=0;
+  BusMall.all.push(this);
 }
 
 BusMall.all=[];
@@ -42,35 +45,99 @@ new BusMall ('wine-glass','../img/wine-glass.jpg');
 console.log(BusMall.all);
 
 function dispalyThreeImages() {
+  leftIndex=generateRandomIndex();
+  RightIndex=generateRandomIndex();
+  MiddleIndex=generateRandomIndex();
+  console.log(leftIndex);
+  console.log(MiddleIndex);
+  console.log(RightIndex);
+  while (leftIndex===RightIndex || leftIndex===MiddleIndex || RightIndex===MiddleIndex){
     leftIndex=generateRandomIndex();
-    MiddleIndex=generateRandomIndex();
     RightIndex=generateRandomIndex();
-    console.log(leftIndex);
-    console.log(MiddleIndex);
-    console.log(RightIndex);
-    while (leftIndex===RightIndex || leftIndex===MiddleIndex || RightIndex===MiddleIndex){
-        leftIndex=generateRandomIndex();
-        RightIndex=generateRandomIndex();
-    }
-    leftImageElement.src= BusMall.all[leftIndex].source;
-    rightImageElement.src=BusMall.all[RightIndex].source;
-    middleImageElement.src=BusMall.all[MiddleIndex].source;
+    MiddleIndex=generateRandomIndex();
+  }
+  leftImageElement.src= BusMall.all[leftIndex].source;
+  rightImageElement.src=BusMall.all[RightIndex].source;
+  middleImageElement.src=BusMall.all[MiddleIndex].source;
+  BusMall.all[leftIndex].shown++;
+  BusMall.all[RightIndex].shown++;
+  BusMall.all[MiddleIndex].shown++;
 }
 dispalyThreeImages();
 
 
 
 function generateRandomIndex() {
-let randomIndex=Math.floor(Math.random() * BusMall.all.length);
-return randomIndex;
+  let randomIndex=Math.floor(Math.random() * BusMall.all.length);
+  return randomIndex;
 }
-console.log(generateRandomIndex);
+// generateRandomIndex();
+// console.log(generateRandomIndex);
 
 
 leftImageElement.addEventListener('click',handleClicking);
 rightImageElement.addEventListener('click',handleClicking);
 middleImageElement.addEventListener('click',handleClicking);
-function handleClicking(event){
-console.log(event.target.id);
 
+
+
+function handleClicking(event){
+//   console.log(event.target.id);
+  clickingNumber++;
+  console.log(event.target.id);
+
+  if (rounds >= clickingNumber){
+    if(event.target.id==='leftimage'){
+      BusMall.all[leftIndex].votes++;
+      //   BusMall.all[leftIndex].shown++;
+      //   clickingNumber++;
+      console.log(clickingNumber);
+      dispalyThreeImages();
+    }else if (event.target.id==='rightimage'){
+      BusMall.all[RightIndex].votes++;
+      //   BusMall.all[RightIndex].shown++;
+      //   clickingNumber++;
+      console.log(clickingNumber);
+      dispalyThreeImages();
+    }else if (event.target.id==='middleimage'){
+      BusMall.all[MiddleIndex].votes++;
+      //   BusMall.all[MiddleIndex].shown++;
+      //   clickingNumber++;
+      console.log(clickingNumber);
+      dispalyThreeImages();
+    }}else if (clickingNumber===25){
+    ibrahem();
+  }
+  else {
+    // console.log('string');
+    // list();
+    leftImageElement.removeEventListener('click',handleClicking);
+    rightImageElement.removeEventListener('click',handleClicking);
+    middleImageElement.removeEventListener('click',handleClicking);
+  }
+}
+
+
+// handleClicking(Event.target.id);
+
+
+// ibrahem();
+
+function list(){
+  let ul = document.getElementById('unlist');
+  for (let i=0 ;i < BusMall.all.length;i++){
+    let li=document.createElement('li');
+    ul.appendChild(li);
+    // console.log('iciubiuced');
+    li.textContent = `${BusMall.all[i].name} has ${BusMall.all[i].votes} Votes and has ${BusMall.all[i].votes} shown`;
+    // console.log('list');
+  }
+//   list();
+}
+
+function ibrahem() {
+//   alert('osaid');
+  list();
+  let stop=document.getElementById('osaid');
+  stop.setAttribute('onClick',null);
 }
