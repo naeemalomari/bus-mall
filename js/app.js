@@ -138,6 +138,6 @@ function list(){
 function ibrahem() {
 //   alert('osaid');
   list();
-  let stop=document.getElementById('osaid');
+  let stop=document.getElementById('btn');
   stop.setAttribute('onClick',null);
 }
