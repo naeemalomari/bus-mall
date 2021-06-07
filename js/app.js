@@ -8,11 +8,13 @@ let leftIndex;
 let RightIndex;
 let MiddleIndex;
 
-let rounds=5;
+let rounds=25;
 let clickingNumber=0;
 
 let arrOfImages=[];
 let arrOfNames=[];
+let newArr=[leftIndex,RightIndex,MiddleIndex];
+newArr.includes[leftIndex,RightIndex,MiddleIndex];
 // arrOfNames.reverse();
 // console.log(arrOfNames);
 let arrOfVotes=[];
@@ -59,6 +61,9 @@ console.log(arrOfImages.includes('bag'));
 console.log(arrOfNames.includes('dragon'));
 
 
+// reverse.include[leftIndex];
+
+
 function dispalyThreeImages() {
   leftIndex=generateRandomIndex();
   RightIndex=generateRandomIndex();
@@ -66,14 +71,24 @@ function dispalyThreeImages() {
   console.log(leftIndex);
   console.log(MiddleIndex);
   console.log(RightIndex);
-  let reverse=[leftIndex,RightIndex,MiddleIndex];
-  while (leftIndex===RightIndex || leftIndex===MiddleIndex || RightIndex===MiddleIndex || leftIndex===reverse || RightIndex=== reverse || MiddleIndex===reverse){
+
+  while (leftIndex===RightIndex || leftIndex===MiddleIndex || RightIndex===MiddleIndex || leftIndex=== newArr || RightIndex=== newArr || MiddleIndex=== newArr){
     leftIndex=generateRandomIndex();
     RightIndex=generateRandomIndex();
     MiddleIndex=generateRandomIndex();
-    reverse=[leftIndex,RightIndex,MiddleIndex];
+    newArr[0]=leftIndex;
+    console.log(newArr[0]);
+    newArr[1]=RightIndex;
+    console.log(newArr[1]);
+    newArr[2]=MiddleIndex;
+    console.log(newArr[2]);
+
+
+
+    // console.log(n);
   }
-  console.log(reverse);
+
+  console.log(newArr);
 
 
   leftImageElement.src= BusMall.all[leftIndex].source;
@@ -141,7 +156,7 @@ function list(){
     let li=document.createElement('li');
     ul.appendChild(li);
     // console.log('iciubiuced');
-    li.textContent = `${BusMall.all[i].name} has ${BusMall.all[i].votes} Votes and has ${BusMall.all[i].shown} shown`;
+    li.textContent = `${BusMall.all[i].name} has ${BusMall.all[i].votes} Votes and has ${BusMall.all[i].shown} shown .`;
     // console.log('list');
   }
 //   list();
