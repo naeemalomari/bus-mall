@@ -13,8 +13,10 @@ let clickingNumber=0;
 
 let arrOfImages=[];
 let arrOfNames=[];
-let newArr=[leftIndex,RightIndex,MiddleIndex];
-newArr.includes[leftIndex,RightIndex,MiddleIndex];
+
+
+let newArr=[];
+// newArr.includes[leftIndex,RightIndex,MiddleIndex];
 // arrOfNames.reverse();
 // console.log(arrOfNames);
 let arrOfVotes=[];
@@ -27,6 +29,7 @@ function BusMall (name,source){
   BusMall.all.push(this);
   arrOfImages.push(this.source);
   arrOfNames.push(this.name);
+
 }
 console.log(arrOfShown);
 
@@ -72,18 +75,19 @@ function dispalyThreeImages() {
   console.log(MiddleIndex);
   console.log(RightIndex);
 
-  while (leftIndex===RightIndex || leftIndex===MiddleIndex || RightIndex===MiddleIndex || leftIndex=== newArr || RightIndex=== newArr || MiddleIndex=== newArr){
+  while (leftIndex===RightIndex || leftIndex===MiddleIndex || RightIndex===MiddleIndex || newArr.includes(leftIndex) || newArr.includes(RightIndex) || newArr.includes(MiddleIndex)){
     leftIndex=generateRandomIndex();
     RightIndex=generateRandomIndex();
     MiddleIndex=generateRandomIndex();
-    newArr[0]=leftIndex;
-    console.log(newArr[0]);
-    newArr[1]=RightIndex;
-    console.log(newArr[1]);
-    newArr[2]=MiddleIndex;
-    console.log(newArr[2]);
 
-
+    newArr=[leftIndex,RightIndex,MiddleIndex];
+    // console.log( newArr.includes(leftIndex) );
+    // newArr[0]=leftIndex;
+    // console.log(newArr[0]);
+    // newArr[1]=RightIndex;
+    // console.log(newArr[1]);
+    // newArr[2]=MiddleIndex;
+    // console.log(newArr[2]);
 
     // console.log(n);
   }
@@ -122,11 +126,11 @@ function handleClicking(event){
   if (rounds >= clickingNumber){
     if(event.target.id==='leftimage'){
       BusMall.all[leftIndex].votes++;
-      console.log(clickingNumber);
+      // console.log(clickingNumber);
       dispalyThreeImages();
     }else if (event.target.id==='rightimage'){
       BusMall.all[RightIndex].votes++;
-      console.log(clickingNumber);
+      // console.log(clickingNumber);
       dispalyThreeImages();
     }else if (event.target.id==='middleimage'){
       BusMall.all[MiddleIndex].votes++;
