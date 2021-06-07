@@ -8,19 +8,30 @@ let leftIndex;
 let RightIndex;
 let MiddleIndex;
 
-let rounds=25;
+let rounds=5;
 let clickingNumber=0;
 
+let arrOfImages=[];
+let arrOfNames=[];
+// arrOfNames.reverse();
+// console.log(arrOfNames);
+let arrOfVotes=[];
+let arrOfShown=[];
 function BusMall (name,source){
   this.name=name;
   this.source=source;
   this.votes=0;
   this.shown=0;
   BusMall.all.push(this);
+  arrOfImages.push(this.source);
+  arrOfNames.push(this.name);
 }
+console.log(arrOfShown);
 
+console.log(arrOfNames);
+console.log(arrOfImages);
 BusMall.all=[];
-
+console.log(BusMall.all);
 new BusMall('bag','../img/bag.jpg');
 new BusMall ('banana','../img/banana.jpg');
 new BusMall('bathroom','../img/bathroom.jpg');
@@ -42,7 +53,11 @@ new BusMall ('usb','../img/usb.gif');
 new BusMall('water-can','../img/water-can.jpg');
 new BusMall ('wine-glass','../img/wine-glass.jpg');
 
-console.log(BusMall.all);
+// console.log(BusMall.all);
+console.log(arrOfImages.includes('../img/bag.jpg'));
+console.log(arrOfImages.includes('bag'));
+console.log(arrOfNames.includes('dragon'));
+
 
 function dispalyThreeImages() {
   leftIndex=generateRandomIndex();
@@ -51,18 +66,25 @@ function dispalyThreeImages() {
   console.log(leftIndex);
   console.log(MiddleIndex);
   console.log(RightIndex);
-  while (leftIndex===RightIndex || leftIndex===MiddleIndex || RightIndex===MiddleIndex){
+  let reverse=[leftIndex,RightIndex,MiddleIndex];
+  while (leftIndex===RightIndex || leftIndex===MiddleIndex || RightIndex===MiddleIndex || leftIndex===reverse || RightIndex=== reverse || MiddleIndex===reverse){
     leftIndex=generateRandomIndex();
     RightIndex=generateRandomIndex();
     MiddleIndex=generateRandomIndex();
+    reverse=[leftIndex,RightIndex,MiddleIndex];
   }
+  console.log(reverse);
+
+
   leftImageElement.src= BusMall.all[leftIndex].source;
-  rightImageElement.src=BusMall.all[RightIndex].source;
-  middleImageElement.src=BusMall.all[MiddleIndex].source;
   BusMall.all[leftIndex].shown++;
+  rightImageElement.src=BusMall.all[RightIndex].source;
   BusMall.all[RightIndex].shown++;
+  middleImageElement.src=BusMall.all[MiddleIndex].source;
   BusMall.all[MiddleIndex].shown++;
+
 }
+
 dispalyThreeImages();
 
 
@@ -71,10 +93,6 @@ function generateRandomIndex() {
   let randomIndex=Math.floor(Math.random() * BusMall.all.length);
   return randomIndex;
 }
-// generateRandomIndex();
-// console.log(generateRandomIndex);
-
-
 leftImageElement.addEventListener('click',handleClicking);
 rightImageElement.addEventListener('click',handleClicking);
 middleImageElement.addEventListener('click',handleClicking);
@@ -89,28 +107,20 @@ function handleClicking(event){
   if (rounds >= clickingNumber){
     if(event.target.id==='leftimage'){
       BusMall.all[leftIndex].votes++;
-      //   BusMall.all[leftIndex].shown++;
-      //   clickingNumber++;
       console.log(clickingNumber);
       dispalyThreeImages();
     }else if (event.target.id==='rightimage'){
       BusMall.all[RightIndex].votes++;
-      //   BusMall.all[RightIndex].shown++;
-      //   clickingNumber++;
       console.log(clickingNumber);
       dispalyThreeImages();
     }else if (event.target.id==='middleimage'){
       BusMall.all[MiddleIndex].votes++;
-      //   BusMall.all[MiddleIndex].shown++;
-      //   clickingNumber++;
       console.log(clickingNumber);
       dispalyThreeImages();
     }}else if (clickingNumber===25){
-    ibrahem();
+    button();
   }
   else {
-    // console.log('string');
-    // list();
     leftImageElement.removeEventListener('click',handleClicking);
     rightImageElement.removeEventListener('click',handleClicking);
     middleImageElement.removeEventListener('click',handleClicking);
@@ -121,23 +131,55 @@ function handleClicking(event){
 // handleClicking(Event.target.id);
 
 
-// ibrahem();
+// Button();
 
 function list(){
   let ul = document.getElementById('unlist');
   for (let i=0 ;i < BusMall.all.length;i++){
+    arrOfShown.push(BusMall.all[i].shown);
+    arrOfVotes.push(BusMall.all[i].votes);
     let li=document.createElement('li');
     ul.appendChild(li);
     // console.log('iciubiuced');
-    li.textContent = `${BusMall.all[i].name} has ${BusMall.all[i].votes} Votes and has ${BusMall.all[i].votes} shown`;
+    li.textContent = `${BusMall.all[i].name} has ${BusMall.all[i].votes} Votes and has ${BusMall.all[i].shown} shown`;
     // console.log('list');
   }
 //   list();
 }
 
-function ibrahem() {
+function button() {
 //   alert('osaid');
   list();
+  startingChart();
   let stop=document.getElementById('btn');
   stop.setAttribute('onClick',null);
+}
+
+
+function startingChart(){
+
+  let ctx = document.getElementById('myChart');
+  let myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: arrOfNames,
+      datasets: [{
+        label: '# of Votes',
+        data: arrOfVotes,
+        backgroundColor: [
+          'rgba(100, 420, 132, 2)',
+        ],
+        borderWidth:1
+      },{
+        label: '# of shown',
+        data: arrOfShown,
+        backgroundColor: [
+          'rgba(500, 120, 200, 0.9)',
+
+        ],
+        borderWidth:5
+      }
+      ]
+    },
+  });
 }
