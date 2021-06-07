@@ -59,9 +59,9 @@ new BusMall('water-can','../img/water-can.jpg');
 new BusMall ('wine-glass','../img/wine-glass.jpg');
 
 // console.log(BusMall.all);
-console.log(arrOfImages.includes('../img/bag.jpg'));
-console.log(arrOfImages.includes('bag'));
-console.log(arrOfNames.includes('dragon'));
+// console.log(arrOfImages.includes('../img/bag.jpg'));
+// console.log(arrOfImages.includes('bag'));
+// console.log(arrOfNames.includes('dragon'));
 
 
 // reverse.include[leftIndex];
@@ -79,18 +79,18 @@ function dispalyThreeImages() {
     leftIndex=generateRandomIndex();
     RightIndex=generateRandomIndex();
     MiddleIndex=generateRandomIndex();
-
-    newArr=[leftIndex,RightIndex,MiddleIndex];
-    // console.log( newArr.includes(leftIndex) );
-    // newArr[0]=leftIndex;
-    // console.log(newArr[0]);
-    // newArr[1]=RightIndex;
-    // console.log(newArr[1]);
-    // newArr[2]=MiddleIndex;
-    // console.log(newArr[2]);
-
-    // console.log(n);
   }
+  newArr=[leftIndex,RightIndex,MiddleIndex];
+  // console.log( newArr.includes(leftIndex) );
+  // newArr[0]=leftIndex;
+  // console.log(newArr[0]);
+  // newArr[1]=RightIndex;
+  // console.log(newArr[1]);
+  // newArr[2]=MiddleIndex;
+  // console.log(newArr[2]);
+
+  // console.log(n);
+  
 
   console.log(newArr);
 
