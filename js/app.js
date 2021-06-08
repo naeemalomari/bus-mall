@@ -16,7 +16,7 @@ let leftIndex;
 let RightIndex;
 let MiddleIndex;
 
-let rounds=5;
+let rounds=25;
 let clickingNumber=0;
 
 let arrOfImages=[];

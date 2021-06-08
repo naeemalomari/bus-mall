@@ -1,11 +1,17 @@
 *{
-    background-color: grey;
+    background-color: lightgrey;
 
 }
 body section img {
-    border: darkblue;
+
+border-style: dotted;
+border-top-color: yellow;
+border-bottom-color:tomato;
+border-left-color:red;
+border-right-color:  darkgreen;
+border-width: 10px;
     position: relative;
-    top:50px;
+    top:100px;
     box-sizing: border-box;
     display: inline-block;
     width: 300px;
@@ -19,13 +25,17 @@ body button {
     margin: 10px;
     height: 100px;
     width: 300px;
-    font-size: 40px;
-    background-color: rgba(255, 210, 125, 0.637);
-    color: lightslategray;
+    font-size: 30px;
+    background-color: rgb(162, 250, 0);
+    color: rgb(255, 71, 71);
+font-family: monospace;
 }
 ul {
-
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    color: whitesmoke;
+    margin :150px;
+font-family:sans-serif;
+    color:rgb(3, 155, 160);
     font-size: x-large;
+}
+button:hover{
+    background-color: darkslateblue;
 }
