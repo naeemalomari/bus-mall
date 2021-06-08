@@ -2,7 +2,15 @@
 let leftImageElement=document.getElementById('leftimage');
 let rightImageElement=document.getElementById('rightimage');
 let middleImageElement=document.getElementById('middleimage');
+
+
+let ul = document.getElementById('unlist');
+
+
 // let section=document.getElementById('list');
+
+
+
 
 let leftIndex;
 let RightIndex;
@@ -31,11 +39,13 @@ function BusMall (name,source){
   arrOfNames.push(this.name);
 
 }
+// console.log(savingData);
 console.log(arrOfShown);
 
 console.log(arrOfNames);
 console.log(arrOfImages);
 BusMall.all=[];
+console.log(BusMall.all);
 console.log(BusMall.all);
 new BusMall('bag','../img/bag.jpg');
 new BusMall ('banana','../img/banana.jpg');
@@ -118,6 +128,9 @@ middleImageElement.addEventListener('click',handleClicking);
 
 
 
+
+
+
 function handleClicking(event){
 //   console.log(event.target.id);
   clickingNumber++;
@@ -143,17 +156,49 @@ function handleClicking(event){
     leftImageElement.removeEventListener('click',handleClicking);
     rightImageElement.removeEventListener('click',handleClicking);
     middleImageElement.removeEventListener('click',handleClicking);
+    savingData();
+
   }
 }
 
 
 // handleClicking(Event.target.id);
-
-
 // Button();
 
+
+
+function savingData(){
+  let convertedArr=JSON.stringify(BusMall.all);
+  localStorage.setItem('unlist',convertedArr);
+  // console.log(convertedArr);
+  // console.log(convertedArr.length);
+
+}
+
+
+
+function runningLs(){
+  let data=localStorage.getItem('unlist');
+  // console.log(data);
+  let parsedUnlist=JSON.parse(data);
+  console.log(parsedUnlist);
+  if (parsedUnlist){
+    BusMall.all=parsedUnlist;
+
+    // list();
+
+  }
+
+
+
+}
+
+
+
 function list(){
-  let ul = document.getElementById('unlist');
+
+  ul.textContent = '' ;
+
   for (let i=0 ;i < BusMall.all.length;i++){
     arrOfShown.push(BusMall.all[i].shown);
     arrOfVotes.push(BusMall.all[i].votes);
@@ -162,9 +207,12 @@ function list(){
     // console.log('iciubiuced');
     li.textContent = `${BusMall.all[i].name} has ${BusMall.all[i].votes} Votes and has ${BusMall.all[i].shown} shown .`;
     // console.log('list');
+    ul.appendChild(li);
   }
 //   list();
 }
+
+
 
 function button() {
 //   alert('osaid');
@@ -202,3 +250,4 @@ function startingChart(){
     },
   });
 }
+runningLs();
