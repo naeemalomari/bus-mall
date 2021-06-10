@@ -7,7 +7,7 @@ let middleImageElement=document.getElementById('middleimage');
 let ul = document.getElementById('unlist');
 
 
-// let section=document.getElementById('list');
+
 
 
 
@@ -24,9 +24,7 @@ let arrOfNames=[];
 
 
 let newArr=[];
-// newArr.includes[leftIndex,RightIndex,MiddleIndex];
-// arrOfNames.reverse();
-// console.log(arrOfNames);
+
 let arrOfVotes=[];
 let arrOfShown=[];
 function BusMall (name,source){
@@ -68,15 +66,8 @@ new BusMall ('usb','../img/usb.gif');
 new BusMall('water-can','../img/water-can.jpg');
 new BusMall ('wine-glass','../img/wine-glass.jpg');
 
-// console.log(BusMall.all);
-// console.log(arrOfImages.includes('../img/bag.jpg'));
-// console.log(arrOfImages.includes('bag'));
-// console.log(arrOfNames.includes('dragon'));
 
-
-// reverse.include[leftIndex];
-
-
+// this function to display the images. 
 function dispalyThreeImages() {
   leftIndex=generateRandomIndex();
   RightIndex=generateRandomIndex();
@@ -91,16 +82,6 @@ function dispalyThreeImages() {
     MiddleIndex=generateRandomIndex();
   }
   newArr=[leftIndex,RightIndex,MiddleIndex];
-  // console.log( newArr.includes(leftIndex) );
-  // newArr[0]=leftIndex;
-  // console.log(newArr[0]);
-  // newArr[1]=RightIndex;
-  // console.log(newArr[1]);
-  // newArr[2]=MiddleIndex;
-  // console.log(newArr[2]);
-
-  // console.log(n);
-  
 
   console.log(newArr);
 
@@ -117,7 +98,7 @@ function dispalyThreeImages() {
 dispalyThreeImages();
 
 
-
+// this function is to get a random number for the images.
 function generateRandomIndex() {
   let randomIndex=Math.floor(Math.random() * BusMall.all.length);
   return randomIndex;
@@ -130,20 +111,17 @@ middleImageElement.addEventListener('click',handleClicking);
 
 
 
-
+// this function is to make sure that if the user clicked the image it will increase the votes and clicking number
 function handleClicking(event){
-//   console.log(event.target.id);
   clickingNumber++;
   console.log(event.target.id);
 
   if (rounds >= clickingNumber){
     if(event.target.id==='leftimage'){
       BusMall.all[leftIndex].votes++;
-      // console.log(clickingNumber);
       dispalyThreeImages();
     }else if (event.target.id==='rightimage'){
       BusMall.all[RightIndex].votes++;
-      // console.log(clickingNumber);
       dispalyThreeImages();
     }else if (event.target.id==='middleimage'){
       BusMall.all[MiddleIndex].votes++;
@@ -162,21 +140,18 @@ function handleClicking(event){
 }
 
 
-// handleClicking(Event.target.id);
-// Button();
 
 
-
+// function to save data
 function savingData(){
   let convertedArr=JSON.stringify(BusMall.all);
   localStorage.setItem('unlist',convertedArr);
-  // console.log(convertedArr);
-  // console.log(convertedArr.length);
+
 
 }
 
 
-
+// is to convert the array to array of objects
 function runningLs(){
   let data=localStorage.getItem('unlist');
   // console.log(data);
@@ -185,8 +160,6 @@ function runningLs(){
   if (parsedUnlist){
     BusMall.all=parsedUnlist;
 
-    // list();
-
   }
 
 
@@ -194,7 +167,7 @@ function runningLs(){
 }
 
 
-
+// this function is to list the inputs from the user.
 function list(){
 
   ul.textContent = '' ;
@@ -204,25 +177,21 @@ function list(){
     arrOfVotes.push(BusMall.all[i].votes);
     let li=document.createElement('li');
     ul.appendChild(li);
-    // console.log('iciubiuced');
     li.textContent = `${BusMall.all[i].name} has ${BusMall.all[i].votes} Votes and has ${BusMall.all[i].shown} shown .`;
-    // console.log('list');
     ul.appendChild(li);
   }
-//   list();
 }
 
 
-
+// button click me 
 function button() {
-//   alert('osaid');
   list();
   startingChart();
   let stop=document.getElementById('btn');
   stop.setAttribute('onClick',null);
 }
 
-
+// chart function 
 function startingChart(){
 
   let ctx = document.getElementById('myChart');
